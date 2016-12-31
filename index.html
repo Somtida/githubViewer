@@ -9,14 +9,31 @@
 
   <body ng-controller="mainCtrl">
     <pre>{{error}}</pre>
-    
+
     <form ng-click="search()">
       <input type="text" placeholder="somtida" ng-model="inputName" required>
       <input type="submit" value="Search">
     </form>
-    
-    <h1>{{message}} {{user.name}}</h1>
+
+    <h1>{{user.name}}</h1>
     <img ng-src={{user.avatar_url}} height="200px" width="200px">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Language</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="repo in repos">
+        <tr>
+          <td>{{repo.name}}</td>
+          <td>{{repo.language}}</td>
+          <td>{{repo.clone_url}}</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 
 </html>
