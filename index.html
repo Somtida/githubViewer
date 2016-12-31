@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <script data-require="angularjs@1.5.8" data-semver="1.5.8" src="https://opensource.keycdn.com/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body ng-controller="mainCtrl">
+    <pre>{{error}}</pre>
+    
+    <form ng-click="search()">
+      <input type="text" placeholder="somtida" ng-model="inputName" required>
+      <input type="submit" value="Search">
+    </form>
+    
+    <h1>{{message}} {{user.name}}</h1>
+    <img ng-src={{user.avatar_url}} height="200px" width="200px">
+  </body>
+
+</html>
