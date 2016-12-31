@@ -9,21 +9,29 @@
 
   <body ng-controller="mainCtrl">
     <pre>{{error}}</pre>
+    <div>
+      <form ng-click="search()">
+        <input type="text" placeholder="somtida" ng-model="inputName" required>
+        <input type="submit" value="Search">
+      </form>
 
-    <form ng-click="search()">
-      <input type="text" placeholder="somtida" ng-model="inputName" required>
-      <input type="submit" value="Search">
-    </form>
-
-    <h1>{{user.name}}</h1>
-    <img ng-src={{user.avatar_url}} height="200px" width="200px">
-
+      <h1>{{user.name}}</h1>
+      <img ng-src={{user.avatar_url}} height="200px" width="200px">
+    </div>
+    <div>
+      Order:
+      <select name="" id="" ng-model="dataValue">
+        <option value="name">name</option>
+        <option value="language">language</option>
+        <option value="clone_url">URL</option>
+      </select>
+    </div>
     <table>
       <thead>
         <tr>
-          <th ng-click="dataValue = 'name'">Name</th>
-          <th ng-click="dataValue = 'language'">Language</th>
-          <th ng-click="dataValue = 'clone_url'">URL</th>
+          <th>Name</th>
+          <th>Language</th>
+          <th>URL</th>
         </tr>
       </thead>
       <tbody ng-repeat="repo in repos | orderBy: dataValue">
