@@ -10,38 +10,16 @@
   <body ng-controller="mainCtrl">
     <pre>{{error}}</pre>
     <div>
+      <h1>Github Viewer</h1>
       <form ng-click="search()">
         <input type="text" placeholder="somtida" ng-model="inputName" required>
         <input type="submit" value="Search">
       </form>
+    </div>
 
-      <h1>{{user.name}}</h1>
-      <img ng-src={{user.avatar_url}} height="200px" width="200px">
+    <div ng-include="'userDetail.html'" ng-show="user">
     </div>
-    <div>
-      Order:
-      <select name="" id="" ng-model="dataValue">
-        <option value="name">name</option>
-        <option value="language">language</option>
-        <option value="clone_url">URL</option>
-      </select>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Language</th>
-          <th>URL</th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="repo in repos | orderBy: dataValue">
-        <tr>
-          <td>{{repo.name}}</td>
-          <td>{{repo.language}}</td>
-          <td>{{repo.clone_url}}</td>
-        </tr>
-      </tbody>
-    </table>
+
   </body>
 
 </html>
