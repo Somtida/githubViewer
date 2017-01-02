@@ -22,11 +22,6 @@
       $scope.error = "Counld not fetch the user";
     }
 
-    $scope.search = (inputName) => {
-      $http.get("https://api.github.com/users/"+inputName)
-        .then(completedUser, error);
-    }
-
     var decrementCountdown = () => {
       $scope.countdown -= 1;
       if($scope.countdown < 1) {
@@ -34,14 +29,25 @@
       }
     }
 
+    var countdownInterval = null;
+
+
     var startCountdown = () => {
-      $interval(decrementCountdown, 1000, $scope.countdown);
+      countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
     }
+
+    $scope.search = (inputName) => {
+      $http.get("https://api.github.com/users/"+inputName)
+        .then(completedUser, error);
+      if(countdownInterval) {
+        $interval.cancel(countdownInterval);
+        $scope.countdown = null;
+      }
+    }
+
 
     $scope.countdown = 5;
     startCountdown();
-
-
 
 
   }
