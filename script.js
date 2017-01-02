@@ -3,19 +3,19 @@
 
   var app = angular.module('myApp',[]);
 
-  var mainCtrl = function($scope, $http, $interval, $anchorScroll, $location) {
+  var mainCtrl = function($scope, github, $interval, $anchorScroll, $location) {
    // $scope.message = "Hello Y'all";
 
     $scope.inputName = "somtida";
 
-    var completedUser = (res) => {
-      $scope.user = res.data;
-      $http.get($scope.user.repos_url)
+    var completedUser = (data) => {
+      $scope.user = data;
+      github.getRepos($scope.user)
         .then(completedRepo, error)
     }
 
-    var completedRepo = (res) => {
-      $scope.repos = res.data;
+    var completedRepo = (data) => {
+      $scope.repos = data;
       $location.hash("userDetail");
       $anchorScroll();
     }
@@ -39,7 +39,7 @@
     }
 
     $scope.search = (inputName) => {
-      $http.get("https://api.github.com/users/"+inputName)
+      github.getUser(inputName)
         .then(completedUser, error);
       if(countdownInterval) {
         $interval.cancel(countdownInterval);
@@ -56,7 +56,7 @@
 
   }
 
-  app.controller("mainCtrl", ["$scope", "$http", "$interval", "$anchorScroll", "$location", mainCtrl])
+  app.controller("mainCtrl", mainCtrl)
 
 
 }());
