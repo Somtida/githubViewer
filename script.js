@@ -3,7 +3,7 @@
 
   var app = angular.module('myApp',[]);
 
-  var mainCtrl = function($scope, $http, $interval) {
+  var mainCtrl = function($scope, $http, $interval, $anchorScroll, $location) {
    // $scope.message = "Hello Y'all";
 
     $scope.inputName = "somtida";
@@ -16,6 +16,8 @@
 
     var completedRepo = (res) => {
       $scope.repos = res.data;
+      $location.hash("userDetail");
+      $anchorScroll();
     }
 
     var error = () => {
@@ -45,14 +47,16 @@
       }
     }
 
-
+    $scope.dataValue = "+name";
     $scope.countdown = 5;
     startCountdown();
 
 
+
+
   }
 
-  app.controller("mainCtrl", ["$scope", "$http", "$interval", mainCtrl])
+  app.controller("mainCtrl", ["$scope", "$http", "$interval", "$anchorScroll", "$location", mainCtrl])
 
 
 }());
