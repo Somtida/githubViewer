@@ -24,7 +24,10 @@
           repo = res.data;
           return $http.get(`${repoUrl}/collaborators`)
         })
-
+        .then((res) => {
+          repo.collaborators = res.data;
+          return repo;
+        })
     }
 
     return {
