@@ -2,25 +2,17 @@
 <html ng-app="myApp">
 
   <head>
-    <script data-require="angularjs@1.5.8" data-semver="1.5.8" src="https://opensource.keycdn.com/angularjs/1.5.8/angular.min.js"></script>
+    <script data-require="angular.js@1.5.8" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular.js"></script>
+    <script data-require="angular-route@1.5.8" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="github.js"></script>
   </head>
 
-  <body ng-controller="mainCtrl">
-    <pre>{{error}}</pre>
-    <div>
-      <h1>Github Viewer</h1>
-      <form ng-click="search(inputName)">
-        <input type="text" placeholder="somtida" ng-model="inputName" required>
-        <input type="submit" value="Search">
-      </form>
-    </div>
-    <h5 ng-if="countdown">Searching in {{countdown}}</h5>
-
-    <div ng-include="'userDetail.html'" ng-show="user">
-    </div>
-
+  <body>
+    <h1>Github Viewer</h1>
+    <div ng-view></div>
   </body>
 
 </html>
