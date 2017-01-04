@@ -24,6 +24,7 @@
         $interval.cancel(countdownInterval);
         $scope.countdown = null;
       }
+      $location.path("/user/"+inputName)
     }
 
     $scope.inputName = "somtida";
@@ -32,11 +33,7 @@
 
   }
 
-  var userCtrl = function($scope, github) {
-    // $scope.message = "Hello Y'all";
-
-
-    $scope.inputName = "somtida";
+  var userCtrl = function($scope, $routeParams, github) {
 
     var completedUser = (data) => {
       $scope.user = data;
@@ -46,42 +43,16 @@
 
     var completedRepo = (data) => {
       $scope.repos = data;
-      $location.hash("userDetail");
-      $anchorScroll();
     }
 
     var error = () => {
       $scope.error = "Counld not fetch the user";
     }
 
-    var decrementCountdown = () => {
-      $scope.countdown -= 1;
-      if ($scope.countdown < 1) {
-        $scope.search($scope.inputName);
-      }
-    }
-
-    var countdownInterval = null;
-
-
-    var startCountdown = () => {
-      countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
-    }
-
-    $scope.search = (inputName) => {
-      github.getUser(inputName)
-        .then(completedUser, error);
-      if (countdownInterval) {
-        $interval.cancel(countdownInterval);
-        $scope.countdown = null;
-      }
-    }
-
+    $scope.inputName = $routeParams.username;
     $scope.dataValue = "+name";
-    $scope.countdown = 5;
-    startCountdown();
-
-
+    github.getUser($scope.inputName)
+      .then(completedUser, error);
 
   }
 
