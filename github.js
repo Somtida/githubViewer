@@ -16,16 +16,28 @@
         })
     }
 
+    var getRepoDetails = (username, reponame) => {
+      var repo;
+      var repoUrl = `https://api.github.com/repos/${username}/${reponame}`
+      return $http.get(repoUrl)
+        .then((res) => {
+          repo = res.data;
+          return $http.get(`${repoUrl}/collaborators`)
+        })
+
+    }
+
     return {
       getUser,
-      getRepos
+      getRepos,
+      getRepoDetails
     }
 
 
   }
 
-  var module = angular.module("myApp");
-  module.factory("github", github);
+  var app = angular.module("myApp");
+  app.factory("github", github);
 
 
 }());
